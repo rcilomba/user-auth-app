@@ -1,4 +1,4 @@
-const prompt = require("prompt-sync")();
+const readline = require("readline-sync");
 const { register } = require("./register");
 const { login } = require("./auth");
 const { changePassword } = require("./changePassword");
@@ -15,34 +15,44 @@ while (running) {
   console.log("3. Change password");
   console.log("4. Finish");
 
-  const choice = prompt("Choose an alternative (1-4): ");
+  const choice = readline.question("Choose an alternative (1-4): ");
 
   switch (choice) {
     case "1":
-      const newUsername = prompt("Enter username: ");
-      const newPassword = prompt("Enter password: ");
+      const newUsername = readline.question("Enter username: ");
+      const newPassword = readline.question("Enter password: ", {
+        hideEchoBack: true,
+      });
       const regResult = register(newUsername, newPassword);
       console.log(regResult);
       break;
 
     case "2":
-      const loginUser = prompt("Enter username: ");
-      const loginPass = prompt("Enter password: ");
+      const loginUser = readline.question("Enter username: ");
+      const loginPass = readline.question("Enter password: ", {
+        hideEchoBack: true,
+      });
       const loginResult = login(loginUser, loginPass);
-      console.log(loginResult === true ? "Login succeeded" : loginResult);
+      console.log(loginResult === true ? "Login succeeded!" : loginResult);
       break;
 
     case "3":
-      const cpUser = prompt("Enter username: ");
-      const oldPass = prompt("Enter current password: ");
-      const newPass = prompt("Enter new password: ");
+      const cpUser = readline.question("Enter username: ");
+      const oldPass = readline.question("Enter current password: ", {
+        hideEchoBack: true,
+      });
+      const newPass = readline.question("Enter new password: ", {
+        hideEchoBack: true,
+      });
       const cpResult = changePassword(cpUser, oldPass, newPass);
-      console.log(cpResult === true ? "Password changed" : cpResult);
+      console.log(
+        cpResult === true ? "Password changed successfully!" : cpResult
+      );
       break;
 
     case "4":
       running = false;
-      console.log("Ending...");
+      console.log("Goodbye!");
       break;
 
     default:
