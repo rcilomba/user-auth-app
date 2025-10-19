@@ -1,6 +1,6 @@
 # User Auth App
 
-A simple login app built with React featuring form validation and state management.
+A simple login app built with Node.js featuring user management via JSON and CLI.
 
 ## Tech
 - Node.js
